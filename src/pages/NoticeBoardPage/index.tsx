@@ -1,7 +1,10 @@
-import React from "react";
+import Main from "@components/Main";
+import useSearchPostsQuery from "./hooks/useSearchPostsQuery";
 
 function NoticeBoardPage() {
-  return <div>notice board page</div>;
+  const { data } = useSearchPostsQuery();
+  console.log(data);
+  return <Main></Main>;
 }
 
 export default NoticeBoardPage;
