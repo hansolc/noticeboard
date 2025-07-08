@@ -17,7 +17,6 @@ function PostComments({ data, isError }: PostCommentsProps) {
   if (isError) return <Typography variant="body1">에러 발생</Typography>;
   if (!data || data.length === 0)
     return <Typography>댓글이 없습니다.</Typography>;
-  console.log(data);
   return (
     <div className="pt-5">
       <Typography variant="h5">Comments</Typography>

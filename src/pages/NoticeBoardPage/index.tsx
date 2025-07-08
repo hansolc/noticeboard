@@ -12,6 +12,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchPostField from "./components/SearchPostField";
 import { useNavigate } from "react-router";
+import useYScrollRestore from "@hooks/useYScrollRestore";
 
 function NoticeBoardPage() {
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -19,6 +20,7 @@ function NoticeBoardPage() {
     useSearchPostsQuery();
   const { observe } = useInView({ actionInView: fetchNextPage });
   const navigate = useNavigate();
+  useYScrollRestore();
 
   useEffect(() => {
     if (targetRef.current) {
