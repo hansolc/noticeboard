@@ -3,7 +3,7 @@ import { getPosts } from "../../../actions/posts";
 import { useSearchParams } from "react-router";
 import { useMemo } from "react";
 
-const POSTS_PER_PAGE = 10;
+const POSTS_PER_PAGE = 12;
 
 function useSearchPostsQuery() {
   const [searchParams] = useSearchParams();
@@ -25,6 +25,7 @@ function useSearchPostsQuery() {
         return allPages.length * POSTS_PER_PAGE;
       },
       initialPageParam: 0,
+      staleTime: 1000 * 60 * 5,
     });
 
   const formattedData = useMemo(() => {
