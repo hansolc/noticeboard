@@ -11,12 +11,14 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchPostField from "./components/SearchPostField";
+import { useNavigate } from "react-router";
 
 function NoticeBoardPage() {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { data, fetchNextPage, hasNextPage, isError, isFetchingNextPage } =
     useSearchPostsQuery();
   const { observe } = useInView({ actionInView: fetchNextPage });
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (targetRef.current) {
@@ -42,6 +44,7 @@ function NoticeBoardPage() {
               key={post.id}
               size={{ mobile: 12, desktop: 3 }}
               className="cursor-pointer"
+              onClick={() => navigate(`/posts/${post.id}`)}
             >
               <CardMedia component="img" image="/images/logo.png" alt="logo" />
               <CardContent>
