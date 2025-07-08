@@ -34,11 +34,12 @@ function NoticeBoardPage() {
 
   return (
     <Main>
-      <div className="flex justify-between">
+      <div className="flex justify-between max-xl:flex-col max-xl: pb-10">
         <Typography variant="h2">Notice Board</Typography>
         <SearchPostField />
       </div>
       <Grid container spacing={4} component="section">
+        {/* TODO: data.length===0 처리 */}
         {data?.posts.map((post) => {
           return (
             <Grid

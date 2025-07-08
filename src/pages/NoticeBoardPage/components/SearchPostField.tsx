@@ -29,7 +29,7 @@ function SearchPostField() {
   return (
     <TextField
       id="outlined-basic"
-      label="Outlined"
+      label="Serach posts..."
       variant="outlined"
       onChange={handleChange}
     />
