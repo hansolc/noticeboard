@@ -11,9 +11,9 @@ interface PostDetailProps {
 }
 
 function PostDetail({ data, isError, isLoading }: PostDetailProps) {
+  if (isError) return <Typography variant="body1">에러 발생</Typography>;
   if (isLoading || !data)
     return <Typography variant="body1">가져오는 중...</Typography>;
-  if (isError) return <Typography variant="body1">에러 발생</Typography>;
   return (
     <section className="flex flex-col gap-4">
       <Typography variant="h2">{data.title}</Typography>

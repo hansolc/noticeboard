@@ -6,10 +6,11 @@ import {
   type PostListResponoseType,
   type PostResponseType,
 } from "../schema/posts";
+import { withErrorHandler } from "../utils/error";
 
 const DUMMY_POSTS_API_URL = "https://dummyjson.com/posts";
 
-export async function getPosts({
+async function getPostsApi({
   term,
   skip,
   limit,
@@ -18,86 +19,66 @@ export async function getPosts({
   skip?: number;
   limit?: number;
 }): Promise<PostListResponoseType> {
-  try {
-    const url = new URL(
-      term ? `${DUMMY_POSTS_API_URL}/search` : DUMMY_POSTS_API_URL
-    );
+  const url = new URL(
+    term ? `${DUMMY_POSTS_API_URL}/search` : DUMMY_POSTS_API_URL
+  );
 
-    if (term) {
-      url.searchParams.set("q", term);
-    } else {
-      url.searchParams.set("skip", String(skip));
-      url.searchParams.set("limit", String(limit));
-    }
-    const res = await fetch(url.toString());
-    const jsonData = await res.json();
-
-    const { success, data } = postsResponseSchema.safeParse(jsonData);
-
-    if (!res.ok) {
-      throw new Error("server error");
-    } else if (!success) {
-      throw new Error("데이터 형식이 올바르지 않습니다.");
-    }
-    return data;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    } else {
-      throw new Error("알 수 없는 오류가 발생했습니다.");
-    }
+  if (term) {
+    url.searchParams.set("q", term);
+  } else {
+    url.searchParams.set("skip", String(skip));
+    url.searchParams.set("limit", String(limit));
   }
+  const res = await fetch(url.toString());
+  const jsonData = await res.json();
+
+  const { success, data } = postsResponseSchema.safeParse(jsonData);
+
+  if (!res.ok) {
+    throw new Error("server error");
+  } else if (!success) {
+    throw new Error("데이터 형식이 올바르지 않습니다.");
+  }
+  return data;
 }
 
-export async function getPostById({
+async function getPostByIdApi({
   id,
 }: {
   id: number;
 }): Promise<PostResponseType> {
-  try {
-    const url = new URL(`${DUMMY_POSTS_API_URL}/${id}`);
-    const res = await fetch(url.toString());
-    const jsonData = await res.json();
+  const url = new URL(`${DUMMY_POSTS_API_URL}/${id}`);
+  const res = await fetch(url.toString());
+  const jsonData = await res.json();
 
-    const { success, data } = postItemResponseSchema.safeParse(jsonData);
+  const { success, data } = postItemResponseSchema.safeParse(jsonData);
 
-    if (!res.ok) {
-      throw new Error("server error");
-    } else if (!success) {
-      throw new Error("데이터 형식이 올바르지 않습니다.");
-    }
-    return data;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    } else {
-      throw new Error("알 수 없는 오류가 발생했습니다.");
-    }
+  if (!res.ok) {
+    throw new Error("server error");
+  } else if (!success) {
+    throw new Error("데이터 형식이 올바르지 않습니다.");
   }
+  return data;
 }
 
-export async function getPostComment({
+async function getPostCommentApi({
   id,
 }: {
   id: number;
 }): Promise<PostItemCommentResponseType["comments"]> {
-  try {
-    const url = new URL(`${DUMMY_POSTS_API_URL}/${id}/comments`);
-    const res = await fetch(url.toString());
-    const jsonData = await res.json();
+  const url = new URL(`${DUMMY_POSTS_API_URL}/${id}/comments`);
+  const res = await fetch(url.toString());
+  const jsonData = await res.json();
 
-    const { success, data } = postCommentsResponseSchema.safeParse(jsonData);
-    if (!res.ok) {
-      throw new Error("server error");
-    } else if (!success) {
-      throw new Error("데이터 형식이 올바르지 않습니다.");
-    }
-    return data.comments;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    } else {
-      throw new Error("알 수 없는 오류가 발생했습니다.");
-    }
+  const { success, data } = postCommentsResponseSchema.safeParse(jsonData);
+  if (!res.ok) {
+    throw new Error("server error");
+  } else if (!success) {
+    throw new Error("데이터 형식이 올바르지 않습니다.");
   }
+  return data.comments;
 }
+
+export const getPosts = withErrorHandler(getPostsApi);
+export const getPostById = withErrorHandler(getPostByIdApi);
+export const getPostComment = withErrorHandler(getPostCommentApi);

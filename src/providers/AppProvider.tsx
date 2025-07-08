@@ -3,6 +3,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { store } from "./redux/store";
 import queryClient from "./tanstack/client";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import GlobalAlert from "@components/Alert";
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => (
   <ReduxProvider store={store}>
@@ -17,6 +18,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => (
           },
         })}
       >
+        <GlobalAlert />
         {children}
       </ThemeProvider>
     </QueryClientProvider>
