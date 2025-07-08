@@ -1,4 +1,3 @@
-import Main from "@components/Main";
 import { useParams } from "react-router";
 import usePost from "./hooks/usePost";
 import PostDetail from "./components/PostDetail";
@@ -11,10 +10,10 @@ function NoticeBoardDetailPage() {
   const queryCommentsData = usePostsComments({ id: Number(id) });
 
   return (
-    <Main>
+    <main>
       <PostDetail {...queryPostData} />
       <PostComments {...queryCommentsData} />
-    </Main>
+    </main>
   );
 }
 

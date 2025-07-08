@@ -25,10 +25,9 @@ async function getPostsApi({
 
   if (term) {
     url.searchParams.set("q", term);
-  } else {
-    url.searchParams.set("skip", String(skip));
-    url.searchParams.set("limit", String(limit));
   }
+  url.searchParams.set("skip", String(skip));
+  url.searchParams.set("limit", String(limit));
   const res = await fetch(url.toString());
   const jsonData = await res.json();
 

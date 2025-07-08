@@ -5,6 +5,7 @@ import queryClient from "./tanstack/client";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import GlobalAlert from "@components/Alert";
 import AuthModal from "@components/AuthModal";
+import { Container } from "@mui/material";
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => (
   <ReduxProvider store={store}>
@@ -21,7 +22,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => (
       >
         <GlobalAlert />
         <AuthModal />
-        {children}
+        <Container maxWidth="desktop" className="py-20 max-xl:max-w-[500px]">
+          {children}
+        </Container>
       </ThemeProvider>
     </QueryClientProvider>
   </ReduxProvider>

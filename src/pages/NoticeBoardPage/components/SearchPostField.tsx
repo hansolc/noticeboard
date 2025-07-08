@@ -32,6 +32,7 @@ function SearchPostField() {
       label="Serach posts..."
       variant="outlined"
       onChange={handleChange}
+      className="grow"
     />
   );
 }
