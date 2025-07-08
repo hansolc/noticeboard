@@ -78,6 +78,29 @@ async function getPostCommentApi({
   return data.comments;
 }
 
+async function createPostApi({
+  userId,
+  title,
+  body,
+}: {
+  userId: number;
+  title: string;
+  body: string;
+}) {
+  const url = new URL(`${DUMMY_POSTS_API_URL}/add`);
+  const res = await fetch(url.toString(), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ userId, title, body }),
+  });
+
+  if (!res.ok) {
+    throw new Error("server error");
+  }
+  return "Post Created";
+}
+
 export const getPosts = withErrorHandler(getPostsApi);
 export const getPostById = withErrorHandler(getPostByIdApi);
 export const getPostComment = withErrorHandler(getPostCommentApi);
+export const createPost = withErrorHandler(createPostApi);

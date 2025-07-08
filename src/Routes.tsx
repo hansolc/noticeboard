@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 import NoticeBoardPage from "./pages/NoticeBoardPage";
 import NoticeBoardDetailPage from "./pages/NoticeBoardDetailPage";
+import PostCreatePage from "./pages/PostCreatePage";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/posts/:id",
     Component: NoticeBoardDetailPage,
+  },
+  {
+    path: "/post/create",
+    Component: PostCreatePage,
   },
 ]);
 
