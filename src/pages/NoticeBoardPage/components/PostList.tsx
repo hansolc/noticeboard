@@ -8,6 +8,7 @@ import Card from "@mui/material/Card";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import DeletePostButton from "./DeletePostButton";
 
 function PostList() {
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -68,6 +69,7 @@ function PostList() {
                     </Typography>
                   </div>
                 </div>
+                <DeletePostButton postId={post.id} />
               </CardContent>
             </Grid>
           );

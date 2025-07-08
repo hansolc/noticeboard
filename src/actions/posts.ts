@@ -100,7 +100,20 @@ async function createPostApi({
   return "Post Created";
 }
 
+async function deletePostApi({ postId }: { postId: number }) {
+  const url = new URL(`${DUMMY_POSTS_API_URL}/${postId}`);
+  const res = await fetch(url.toString(), {
+    method: "DELETE",
+  });
+
+  if (!res.ok) {
+    throw new Error("server error");
+  }
+  return "Post Deleted";
+}
+
 export const getPosts = withErrorHandler(getPostsApi);
 export const getPostById = withErrorHandler(getPostByIdApi);
 export const getPostComment = withErrorHandler(getPostCommentApi);
 export const createPost = withErrorHandler(createPostApi);
+export const deletePost = withErrorHandler(deletePostApi);

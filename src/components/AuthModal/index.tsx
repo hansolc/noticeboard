@@ -32,7 +32,7 @@ function AuthModal() {
     <Dialog open={open} onClose={() => dispatch(close())}>
       <DialogTitle>{type === "login" ? "Login" : "Registration"}</DialogTitle>
       <DialogContent>
-        <RoleTabs role={role} setRole={setRole} />
+        {type === "register" && <RoleTabs role={role} setRole={setRole} />}
         <AuthForm mode={type} onSubmit={onSubmit} />
       </DialogContent>
     </Dialog>

@@ -10,7 +10,9 @@ function NoticeBoardPage() {
     <>
       <div className="flex justify-between max-xl:flex-col max-xl: pb-10 gap-10">
         <SearchPostField />
-        {user && <Button variant="contained">+ Create</Button>}
+        {user && user.role !== "guest" && (
+          <Button variant="contained">+ Create</Button>
+        )}
       </div>
       <main>
         <PostList />
