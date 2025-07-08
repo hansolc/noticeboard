@@ -7,8 +7,6 @@ function usePost({ id }: { id: number }) {
     queryFn: () => getPostById({ id }),
   });
 
-  console.log("1: ", error);
-
   return {
     data,
     isError,
