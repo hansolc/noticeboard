@@ -10,6 +10,7 @@ import { useEffect, useRef } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import SearchPostField from "./components/SearchPostField";
 
 function NoticeBoardPage() {
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -29,8 +30,11 @@ function NoticeBoardPage() {
 
   return (
     <Main>
-      <Typography variant="h2">Notice Board</Typography>
-      <Grid container spacing={4}>
+      <div className="flex justify-between">
+        <Typography variant="h2">Notice Board</Typography>
+        <SearchPostField />
+      </div>
+      <Grid container spacing={4} component="section">
         {data?.posts.map((post) => {
           return (
             <Grid
