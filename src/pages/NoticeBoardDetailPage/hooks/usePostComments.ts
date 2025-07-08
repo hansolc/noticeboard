@@ -3,7 +3,7 @@ import { getPostComment } from "../../../actions/posts";
 
 function usePostsComments({ id }: { id: number }) {
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["post comments", id],
+    queryKey: ["comments", id],
     queryFn: () => getPostComment({ id }),
   });
 

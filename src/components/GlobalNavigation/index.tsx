@@ -16,7 +16,7 @@ function GlobalNavigation() {
           <Typography variant="h6">Notice Board</Typography>
           {user && (
             <div className="flex items-center gap-4">
-              <Typography className="max-sm:hidden">{`Welcome ${user.role} ${user.email}`}</Typography>
+              <Typography className="max-xl:hidden">{`Welcome ${user.role} ${user.email}`}</Typography>
               <Button color="inherit" onClick={() => dispatch(logout())}>
                 Logout
               </Button>
