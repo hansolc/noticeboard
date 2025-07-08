@@ -1,6 +1,10 @@
 import {
+  postCommentsResponseSchema,
+  postItemResponseSchema,
   postsResponseSchema,
+  type PostItemCommentResponseType,
   type PostListResponoseType,
+  type PostResponseType,
 } from "../schema/posts";
 
 const DUMMY_POSTS_API_URL = "https://dummyjson.com/posts";
@@ -36,6 +40,59 @@ export async function getPosts({
       throw new Error("데이터 형식이 올바르지 않습니다.");
     }
     return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("알 수 없는 오류가 발생했습니다.");
+    }
+  }
+}
+
+export async function getPostById({
+  id,
+}: {
+  id: number;
+}): Promise<PostResponseType> {
+  try {
+    const url = new URL(`${DUMMY_POSTS_API_URL}/${id}`);
+    const res = await fetch(url.toString());
+    const jsonData = await res.json();
+
+    const { success, data } = postItemResponseSchema.safeParse(jsonData);
+
+    if (!res.ok) {
+      throw new Error("server error");
+    } else if (!success) {
+      throw new Error("데이터 형식이 올바르지 않습니다.");
+    }
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("알 수 없는 오류가 발생했습니다.");
+    }
+  }
+}
+
+export async function getPostComment({
+  id,
+}: {
+  id: number;
+}): Promise<PostItemCommentResponseType["comments"]> {
+  try {
+    const url = new URL(`${DUMMY_POSTS_API_URL}/${id}/comments`);
+    const res = await fetch(url.toString());
+    const jsonData = await res.json();
+
+    const { success, data } = postCommentsResponseSchema.safeParse(jsonData);
+    if (!res.ok) {
+      throw new Error("server error");
+    } else if (!success) {
+      throw new Error("데이터 형식이 올바르지 않습니다.");
+    }
+    return data.comments;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(error.message);

@@ -20,5 +20,24 @@ export const postsResponseSchema = z.object({
   skip: z.number(),
 });
 
+export const postItemCommentResponseSchema = z.object({
+  id: z.number(),
+  body: z.string(),
+  postId: z.number(),
+  likes: z.number(),
+  user: z.object({
+    id: z.number(),
+    username: z.string(),
+    fullName: z.string(),
+  }),
+});
+
+export const postCommentsResponseSchema = z.object({
+  comments: z.array(postItemCommentResponseSchema),
+});
+
 export type PostListResponoseType = z.infer<typeof postsResponseSchema>;
-export type PostResponseType = PostListResponoseType["posts"];
+export type PostResponseType = z.infer<typeof postItemResponseSchema>;
+export type PostItemCommentResponseType = z.infer<
+  typeof postCommentsResponseSchema
+>;
