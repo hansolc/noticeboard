@@ -2,12 +2,12 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthModalState {
   open: boolean;
-  type: "login" | "regis" | null;
+  type: "login" | "register";
 }
 
 const initialState: AuthModalState = {
   open: false,
-  type: null,
+  type: "login",
 };
 
 export const authModalSlice = createSlice({
