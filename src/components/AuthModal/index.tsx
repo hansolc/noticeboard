@@ -6,14 +6,26 @@ import AuthForm from "./AuthForm";
 import { useState } from "react";
 import RoleTabs from "./RoleTabs";
 import type { AuthFormTypes, Role } from "../../types/auth";
+import useRegister from "@hooks/useRegister";
+import useLogin from "@hooks/useLogin";
 
 function AuthModal() {
   const { open, type } = useAppSelector((state: RootState) => state.authModal);
   const dispatch = useAppDispatch();
   const [role, setRole] = useState<Role>("user");
+  const {
+    register,
+    // isPending: registerPending,
+    // error: registerError,
+  } = useRegister();
+  const { login } = useLogin();
 
   const onSubmit = (data: AuthFormTypes) => {
-    console.log(data);
+    if (type === "register") {
+      register({ ...data, role });
+    } else {
+      login({ ...data, role });
+    }
   };
 
   return (

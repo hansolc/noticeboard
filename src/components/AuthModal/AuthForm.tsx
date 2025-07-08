@@ -25,8 +25,8 @@ function AuthForm({ mode, onSubmit }: AuthFormProps) {
           rules={{
             required: "email is required",
             pattern: {
-              value: /^[a-zA-Z0-9]{4,8}$/,
-              message: "4~8자의 영문 또는 숫자만 입력 가능합니다",
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Invalid Email",
             },
           }}
           render={({ field, fieldState }) => (
@@ -49,7 +49,7 @@ function AuthForm({ mode, onSubmit }: AuthFormProps) {
             required: "Password is required",
             pattern: {
               value: /^[a-zA-Z0-9]{4,8}$/,
-              message: "4~8자의 영문 또는 숫자만 입력 가능합니다",
+              message: "4~8 characters or numbers allowed",
             },
           }}
           render={({ field, fieldState }) => (
@@ -90,7 +90,7 @@ function AuthForm({ mode, onSubmit }: AuthFormProps) {
           />
         )}
 
-        <Button variant="contained" type="submit">
+        <Button variant="contained" type="submit" className="w-full">
           Submit
         </Button>
       </form>

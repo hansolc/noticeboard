@@ -37,7 +37,7 @@ async function getPostsApi({
   if (!res.ok) {
     throw new Error("server error");
   } else if (!success) {
-    throw new Error("데이터 형식이 올바르지 않습니다.");
+    throw new Error("Invalid Data");
   }
   return data;
 }
@@ -56,7 +56,7 @@ async function getPostByIdApi({
   if (!res.ok) {
     throw new Error("server error");
   } else if (!success) {
-    throw new Error("데이터 형식이 올바르지 않습니다.");
+    throw new Error("Invalid Data");
   }
   return data;
 }
@@ -74,7 +74,7 @@ async function getPostCommentApi({
   if (!res.ok) {
     throw new Error("server error");
   } else if (!success) {
-    throw new Error("데이터 형식이 올바르지 않습니다.");
+    throw new Error("Invalid Data");
   }
   return data.comments;
 }
