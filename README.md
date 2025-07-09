@@ -54,12 +54,12 @@ pnpm run server
 
 ## 🌍 전역 상태 관리
 
-- **Redux Toolkit**으로 인증 상태, 댓글, 전역 알림(Toast) 관리
-- **TanStack Query (react-query)**로 서버 상태 관리
+- **Redux Toolkit** 으로 인증 상태, 댓글, 전역 알림(Toast) 관리
+- **TanStack Query (react-query)** 로 서버 상태 관리
 
 ## ✅ 주요 기능 및 요구 사항
 
-### 1. 게시글 목록 페이지
+### 1. 게시글 목록 페이지 (NoticeBoardPage)
 
 - **UI 구성**
 
@@ -92,12 +92,12 @@ pnpm run server
 - 댓글 생성/삭제 요청 성공 시 redux 상태를 갱신하여 UI 업데이트
 - 서버 반영이 안 되므로 새로고침/재 진입 시 다시 원래 댓글이 나타나며 등록되지 않은 댓글 ID 삭제 시도시 에러
 
-### 3. 공통 에러 처리
+### 3. 공통 에러 처리 (actions/\*, prviders/tanstack/client.tsx)
 
 - 모든 API 요청은 `actions`에서 처리하며, HOC(`withErrorHandler`)를 통해 반복되는 예외 처리 코드 제거
 - `QueryClient`의 `queryCache.onError`를 통해 tanstackquery 요청 실패 시 전역 `toast`로 에러 메시지 노출 (`queryClient`)
 
-### 4. 인증 기능 개발 (회원가입/로그인/로그아웃)
+### 4. 인증 기능 개발 (회원가입/로그인/로그아웃) (components/AuthModal)
 
 - `useLogin`, `useRegister` 훅으로 로그인 및 회원가입 기능 구현
 - 회원가입 시 Tab 컴포넌트로 admin, user, guest 중 Role 선택
