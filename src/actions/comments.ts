@@ -1,3 +1,4 @@
+import type { CommentState } from "../providers/redux/features/commentsSlice";
 import { withErrorHandler } from "../utils/error";
 
 const DUMMY_COMMENTS_API_URL = "https://dummyjson.com/comments";
@@ -25,7 +26,25 @@ async function createCommentApi({
     throw new Error("server error");
   }
 
-  return { id: userId + 9999, body, postId };
+  // userId hacky way
+  return {
+    id: Math.floor(Math.random() * (9999 - 999 + 1)) + 999,
+    body,
+    postId,
+  };
+}
+
+async function deleteCommentApi({ comment }: { comment: CommentState }) {
+  const res = await fetch(`${DUMMY_COMMENTS_API_URL}/${comment.id}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) {
+    throw new Error("server error");
+  }
+
+  return { comment };
 }
 
 export const createComment = withErrorHandler(createCommentApi);
+export const deleteComment = withErrorHandler(deleteCommentApi);

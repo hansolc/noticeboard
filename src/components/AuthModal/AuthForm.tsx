@@ -8,13 +8,14 @@ type AuthFormProps = {
 };
 
 function AuthForm({ mode, onSubmit }: AuthFormProps) {
-  const { control, handleSubmit } = useForm<AuthFormTypes>({
+  const { control, handleSubmit, watch } = useForm<AuthFormTypes>({
     defaultValues: {
       email: "",
       password: "",
       passwordCheck: "",
     },
   });
+  const password = watch("password");
 
   return (
     <>
@@ -71,10 +72,8 @@ function AuthForm({ mode, onSubmit }: AuthFormProps) {
             control={control}
             rules={{
               required: "Password check is required",
-              pattern: {
-                value: /^[a-zA-Z0-9]{4,8}$/,
-                message: "4~8자의 영문 또는 숫자만 입력 가능합니다",
-              },
+              validate: (value) =>
+                value === password || "Passwords do not match",
             }}
             render={({ field, fieldState }) => (
               <TextField

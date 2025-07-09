@@ -3,6 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useAppSelector } from "../../providers/redux/hooks";
 import type { RootState } from "../../providers/redux/store";
 import useCreatePost from "../NoticeBoardPage/hooks/useCreatePost";
+import { Navigate } from "react-router";
 
 type PostCreateProps = {
   title: string;
@@ -18,6 +19,10 @@ function PostCreatePage() {
       body: "",
     },
   });
+
+  if (!user || user.role === "guest") {
+    return <Navigate to="/" replace />;
+  }
 
   const onSubmit = (data: PostCreateProps) => {
     if (!user) return;

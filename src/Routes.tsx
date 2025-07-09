@@ -20,6 +20,10 @@ const router = createBrowserRouter([
     path: "/post/create",
     Component: PostCreatePage,
   },
+  {
+    path: "*",
+    Component: () => <Navigate to="/posts" />,
+  },
 ]);
 
 export function Routes() {

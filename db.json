@@ -17,6 +17,18 @@
       "password": "$2a$10$HtDMVIyOc.a4/75JzS84buEAeIRS.4H4rEjZKrrgVgXaF1xeUDXOK",
       "role": "admin",
       "id": 3
+    },
+    {
+      "email": "guest@guest.com",
+      "password": "$2a$10$0xciu3XCkUsgBLkzdyrkK.d4/FBhWwxKilExksnHISbsszua1xauO",
+      "role": "guest",
+      "id": 4
+    },
+    {
+      "email": "user@user.com",
+      "password": "$2a$10$NI0s6C9WlRVClqQrUc6zu.6/cPjNhAzZ.BPcwyyqqie1u3I2jLF4O",
+      "role": "user",
+      "id": 5
     }
   ]
 }

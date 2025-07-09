@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-interface CommentState {
+export interface CommentState {
   id: number;
   body: string;
   postId: number;
@@ -28,7 +28,10 @@ export const commentSlice = createSlice({
         }
       });
     },
-    deleteComment: (state, action: PayloadAction<CommentState>) => {
+    deleteComment: (
+      state,
+      action: PayloadAction<Pick<CommentState, "id" | "postId">>
+    ) => {
       const postId = action.payload.postId;
       const commentId = action.payload.id;
       state[postId] = state[postId].filter(

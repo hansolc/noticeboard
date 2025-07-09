@@ -9,6 +9,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { useAppSelector } from "../../../providers/redux/hooks";
 import type { RootState } from "../../../providers/redux/store";
 import CreateCommentsInput from "./CreateCommentsInput";
+import DeleteCommentButton from "./DeleteCommentButton";
 
 interface PostCommentsProps {
   data?: PostItemCommentResponseType["comments"];
@@ -31,8 +32,8 @@ function PostComments({ data, isError, postId }: PostCommentsProps) {
           comments[postId].map((comment) => {
             return (
               <ListItem
-                alignItems="flex-start"
                 key={`post_comment_${comment.id}`}
+                className="flex max-xl:flex-col"
               >
                 <ListItemAvatar>
                   <Avatar alt={comment.user.fullName ?? "Unknown User"} />
@@ -49,6 +50,7 @@ function PostComments({ data, isError, postId }: PostCommentsProps) {
                     </React.Fragment>
                   }
                 />
+                <DeleteCommentButton comment={comment} />
               </ListItem>
             );
           })}
